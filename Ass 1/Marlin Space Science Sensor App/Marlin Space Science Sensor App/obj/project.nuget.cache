@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pyPL7C6Vxg6nvzDrYUvZp2pk7DppBxtFNPzxAFQJr5uAvE3sjAYcK/3xNtIyEgV7ZW8qEbUJA4h4H+JNSyBrTw==",
+  "dgSpecHash": "CLgG8Ix6DL/jSQKmW66bGhzmWnlTldgsc4pAhaJCYXQlukKolkoJNGixmVhNAimEXRJIV9XLF8zeaDE4WmYrDg==",
   "success": true,
-  "projectFilePath": "D:\\2024\\tuesdau\\Complex data structures\\Ass\\Ass 1\\Marlin Space Science Sensor App\\Marlin Space Science Sensor App\\Marlin Space Science Sensor App.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\30062804\\Documents\\GitHub\\Marlin_Space_Science_Sensor_App\\Ass 1\\Marlin Space Science Sensor App\\Marlin Space Science Sensor App\\Marlin Space Science Sensor App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\30062804\\.nuget\\packages\\extended.wpf.toolkit\\4.6.0\\extended.wpf.toolkit.4.6.0.nupkg.sha512"
+  ],
   "logs": []
 }
