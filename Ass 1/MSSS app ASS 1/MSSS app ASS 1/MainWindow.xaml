@@ -12,8 +12,8 @@
             <RowDefinition Height="137*"/>
             <RowDefinition Height="297*"/>
         </Grid.RowDefinitions>
-        <xctk:IntegerUpDown x:Name="Sigma" FormatString="N0" Value="10" Increment="1" Maximum="200000" Margin="10,10,705,71"/>
-        <xctk:IntegerUpDown x:Name="Mu" FormatString="N0" Value="50" Increment="1" Maximum="200000" Margin="130,10,585,71" RenderTransformOrigin="0.959,0.488"/>
+        <xctk:IntegerUpDown x:Name="Sigma" FormatString="N0" Value="10" Increment="1" Minimum="10" Maximum="20" Margin="10,10,705,71"/>
+        <xctk:IntegerUpDown x:Name="Mu" FormatString="N0" Value="50" Increment="1" Minimum="35" Maximum="75" Margin="130,10,585,71" RenderTransformOrigin="0.959,0.488"/>
         <ListView x:Name="CombinedA_B_Listview" Margin="10,98,0,28" HorizontalAlignment="Left" Panel.ZIndex="-4" Width="205" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
@@ -26,7 +26,7 @@
         <Label Content="Sensor A" HorizontalAlignment="Left" Height="34" Margin="234,16,0,0" VerticalAlignment="Top" Width="126" FontSize="20"/>
         <ListBox x:Name="SensorB_Listbox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="644,55,54,21" Grid.RowSpan="2"/>
         <Label Content="Sensor B" HorizontalAlignment="Left" Height="34" Margin="512,16,0,0" VerticalAlignment="Top" Width="126" FontSize="20"/>
-        <Button x:Name="Load_Sensor_Data" Content="Load Sensor Data" HorizontalAlignment="Left" Margin="62,66,0,0" VerticalAlignment="Top" Height="32" Width="102" Click="Display_Click" RenderTransformOrigin="-0.131,0.47"/>
+        <Button x:Name="Load_Sensor_Data" Content="Load Sensor Data" HorizontalAlignment="Left" Margin="62,66,0,0" VerticalAlignment="Top" Height="32" Width="102" Click="Load_Button" RenderTransformOrigin="-0.131,0.47"/>
         <Button x:Name="Binary_Search_Iterative_SensorA" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="229,52,0,0" VerticalAlignment="Top" Click="Iterative_SensorA" Grid.Row="1"/>
         <Button x:Name="Binary_Search_Iterative_SensorB" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="497,52,0,0" VerticalAlignment="Top" Click="Iterative_SensorB" Grid.Row="1"/>
         <Button x:Name="Binary_Search_Recursive_SensorA" Content="Binary search (Recursive)" HorizontalAlignment="Left" Margin="225,165,0,0" VerticalAlignment="Top" Click="Recursive_SensorA" Grid.Row="1"/>

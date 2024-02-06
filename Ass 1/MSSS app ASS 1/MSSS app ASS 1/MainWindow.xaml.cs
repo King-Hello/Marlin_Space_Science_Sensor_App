@@ -1,10 +1,14 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -74,6 +78,7 @@ namespace MSSS_app_ASS_1
         /// </4.3>
         private void ShowAllSensorData()
         {
+            CombinedA_B_Listview.Items.Clear();
             int index = 0;
             foreach (double sensor in sensorA)
             {
@@ -81,6 +86,8 @@ namespace MSSS_app_ASS_1
                 CombinedA_B_Listview.Items.Add(new displayInfo { DisplaySensorA = sensor, DisplaySensorB = sensor2 });
                 index++;
             }
+            DisplayListboxData(sensorB, SensorB_Listbox);
+            DisplayListboxData(sensorA, SensorA_Listbox);
         }
 
         /// <4.4>
@@ -90,14 +97,7 @@ namespace MSSS_app_ASS_1
         private void Load_Button(object sender, RoutedEventArgs e)
         {
             LoadData();
-        }
-
-        private void Display_Click(object sender, RoutedEventArgs e)
-        {
-            if (sensorA.Count >= 0 || sensorB.Count >= 0)
-            {
-                ShowAllSensorData();
-            }
+            ShowAllSensorData();
         }
         #endregion
 
@@ -117,14 +117,16 @@ namespace MSSS_app_ASS_1
         /// </4.6>>
         private void DisplayListboxData(LinkedList<double> values, ListBox listBox)
         {
-
-            foreach (double sensor in values)
+            listBox.Items.Clear();
+            if (listBox.Items.Count <= 0)
             {
-                listBox.Items.Add(sensor);
+                foreach (double sensor in values)
+                {
+                    listBox.Items.Add(sensor);
+                }
             }
         }
         #endregion
-
 
         #region Sort and Search Methods (questions 4.7 - 4.10)
         /// <4.7>
@@ -134,16 +136,22 @@ namespace MSSS_app_ASS_1
         /// </4.7>
         private Boolean SelectionSort(LinkedList<double> values)
         {
+            if (CheckIfAlreadySorted(values) == true)
+            {
+                return false;
+            }
+
+            int counter = 0;
             int min = 0;
             int max = NumberOfNodes(values);
-            for (int i = 0; i < max; i++)
+            for (int i = 0; i < max - 1; i++)
             {
                 min = i;
                 for (int j = i + 1; j < max; j++)
                 {
-                    if (values.ElementAt(j) < values.ElementAt(i))
+                    if (values.ElementAt(j) < values.ElementAt(min))
                     {
-                        min = i;
+                        min = j;
                     }
                 }
                 LinkedListNode<double> currentMin = values.Find(values.ElementAt(min));
@@ -151,8 +159,26 @@ namespace MSSS_app_ASS_1
                 double temp = currentMin.Value;
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
+
             }
-            return true;
+            for (int i = 0; i < max - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (values.ElementAt(j - 1) > values.ElementAt(j))
+                    {
+                        counter++;
+                    }
+                }
+            }
+            if (counter == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <4.8>
@@ -162,18 +188,53 @@ namespace MSSS_app_ASS_1
         /// </4.8>
         private Boolean InsertionSort(LinkedList<double> values)
         {
-            int max = NumberOfNodes(values);
-            for (int i = 0; i < max; max--)
+            if (CheckIfAlreadySorted(values) == true)
             {
-                for (int j = i + 1; j < max; j--)
+                return false;
+            }
+
+            int max = NumberOfNodes(values);
+
+            for (int i = 0; i < max - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
                 {
                     if (values.ElementAt(j - 1) > values.ElementAt(j))
-                    {
+                    { 
                         LinkedListNode<double> current = values.Find(values.ElementAt(j));
+                        LinkedListNode<double> currentI = values.Find(values.ElementAt(j - 1));
+                        double temp = values.ElementAt(j - 1);
+                        values.Remove(currentI);
+                        values.AddAfter(current, temp);
                     }
                 }
             }
             return true;
+        }
+
+        private Boolean CheckIfAlreadySorted(LinkedList<double> values)
+        {
+            int counter = 0;
+            int max = NumberOfNodes(values);
+            for (int i = 0; i < max - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (values.ElementAt(j - 1) > values.ElementAt(j))
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <4.9>
@@ -186,10 +247,10 @@ namespace MSSS_app_ASS_1
         {
             while (Minimum <= Maxium - 1)
             {
-                int middle = Minimum + Maxium / 2;
+                int middle = (Minimum + Maxium) / 2;
                 if (SearchValue == LinkedList.ElementAt(middle))
                 {
-                    return middle;
+                    return ++middle;
                 }
                 else if (SearchValue > middle - 1)
                 {
@@ -213,10 +274,10 @@ namespace MSSS_app_ASS_1
         {
             if (Minimum <= Maxium - 1)
             {
-                int middle = Minimum + Maxium / 2;
+                int middle = (Minimum + Maxium) / 2;
                 if (SearchValue == LinkedList.ElementAt(middle))
                 {
-                    return middle;
+                    return ++middle;
                 }
                 else if (SearchValue < LinkedList.ElementAt(middle))
                 {
@@ -236,12 +297,13 @@ namespace MSSS_app_ASS_1
         #region UI Button Methods
         private void Iterative_SensorA(object sender, RoutedEventArgs e)
         {
-            BinarySearchIterative(sensorA, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
+            int value = BinarySearchIterative(sensorA, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
         }
 
         private void Iterative_SensorB(object sender, RoutedEventArgs e)
         {
-            BinarySearchIterative(sensorB, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
+            DisplayListboxData(sensorB, SensorB_Listbox);
+            
         }
 
         private void Recursive_SensorA(object sender, RoutedEventArgs e)
@@ -256,22 +318,54 @@ namespace MSSS_app_ASS_1
 
         private void Selection_SensorA(object sender, RoutedEventArgs e)
         {
-
+            if (SelectionSort(sensorA) == true)
+            {
+                ShowAllSensorData();
+                DisplayListboxData(sensorA, SensorA_Listbox);
+            }
+            else
+            {
+                MessageBox.Show("List already sorted!");
+            }
         }
 
         private void Selection_SensorB(object sender, RoutedEventArgs e)
         {
-
+            if (SelectionSort(sensorB) == true)
+            {
+                ShowAllSensorData();
+                DisplayListboxData(sensorB, SensorB_Listbox);
+            }
+            else
+            {
+                MessageBox.Show("List already sorted!");
+            }
         }
 
         private void Insertion_SensorA(object sender, RoutedEventArgs e)
         {
-
+            if (InsertionSort(sensorA) == true)
+            {
+                ShowAllSensorData();
+                DisplayListboxData(sensorA, SensorA_Listbox);
+            }
+            else
+            {
+                MessageBox.Show("List already sorted!");
+            }
         }
 
         private void Insertion_SensorB(object sender, RoutedEventArgs e)
         {
-
+            if (InsertionSort(sensorB) == true)
+            {
+                ShowAllSensorData();
+                DisplayListboxData(sensorB, SensorB_Listbox);
+            }
+            else
+            {
+                MessageBox.Show("List already sorted!");
+            }
         }
 
         /// <4.>
