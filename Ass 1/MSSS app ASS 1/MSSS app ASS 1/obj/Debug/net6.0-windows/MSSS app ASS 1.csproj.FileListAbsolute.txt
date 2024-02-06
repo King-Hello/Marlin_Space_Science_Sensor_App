@@ -1,0 +1,40 @@
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\MSSS app ASS 1.exe
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\MSSS app ASS 1.deps.json
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\MSSS app ASS 1.runtimeconfig.json
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\MSSS app ASS 1.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\MSSS app ASS 1.pdb
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\App.g.cs
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1_MarkupCompile.cache
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1_MarkupCompile.lref
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MainWindow.baml
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.g.resources
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.GeneratedMSBuildEditorConfig.editorconfig
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.AssemblyInfoInputs.cache
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.AssemblyInfo.cs
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.csproj.CoreCompileInputs.cache
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\refint\MSSS app ASS 1.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.pdb
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.genruntimeconfig.cache
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\ref\MSSS app ASS 1.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.csproj.AssemblyReference.cache
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.NET5.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.Aero.NET5.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.Metro.NET5.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.VS2010.NET5.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Xceed.Wpf.Toolkit.NET5.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\cs-CZ\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\de\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\es\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\fr\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\hu\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\it\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\ja-JP\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\pt-BR\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\ro\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\ru\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\sv\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\zh-Hans\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\bin\Debug\net6.0-windows\Galileo6.dll
+D:\2024\tuesdau\Complex data structures\Ass\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.csproj.CopyComplete
