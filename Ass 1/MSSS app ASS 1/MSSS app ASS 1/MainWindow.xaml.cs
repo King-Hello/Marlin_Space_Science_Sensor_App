@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -131,109 +134,76 @@ namespace MSSS_app_ASS_1
         #region Sort and Search Methods (questions 4.7 - 4.10)
         /// <4.7>
         /// Create a method called “SelectionSort” which has a single input parameter of type LinkedList,
-        /// while the calling code argument is the linkedlist name. The method code must follow the pseudo code supplied below in the Appendix. 
+        /// while the calling code argument is the linkedlist name. 
+        /// The method code must follow the pseudo code supplied below in the Appendix. 
         /// The return type is Boolean.
         /// </4.7>
-        private Boolean SelectionSort(LinkedList<double> values)
+        private bool SelectionSort(LinkedList<double> values)
         {
-            if (CheckIfAlreadySorted(values) == true)
+            bool ifsorted = false;
+            if (values.Count == 400)
             {
-                return false;
-            }
-
-            int counter = 0;
-            int min = 0;
-            int max = NumberOfNodes(values);
-            for (int i = 0; i < max - 1; i++)
-            {
-                min = i;
-                for (int j = i + 1; j < max; j++)
+                int min = 0;
+                int max = NumberOfNodes(values);
+                for (int i = 0; i < max - 1; i++)
                 {
-                    if (values.ElementAt(j) < values.ElementAt(min))
+                    min = i;
+                    for (int j = i + 1; j < max; j++)
                     {
-                        min = j;
+                        if (values.ElementAt(j) < values.ElementAt(min))
+                        {
+                            min = j;
+                        }
                     }
-                }
-                LinkedListNode<double> currentMin = values.Find(values.ElementAt(min));
-                LinkedListNode<double> currentI = values.Find(values.ElementAt(i));
-                double temp = currentMin.Value;
-                currentMin.Value = currentI.Value;
-                currentI.Value = temp;
+                    LinkedListNode<double> currentMin = values.Find(values.ElementAt(min));
+                    LinkedListNode<double> currentI = values.Find(values.ElementAt(i));
+                    double temp = currentMin.Value;
+                    currentMin.Value = currentI.Value;
+                    currentI.Value = temp;
+                    ifsorted = true;
 
-            }
-            for (int i = 0; i < max - 1; i++)
-            {
-                for (int j = i + 1; j > 0; j--)
-                {
-                    if (values.ElementAt(j - 1) > values.ElementAt(j))
-                    {
-                        counter++;
-                    }
                 }
-            }
-            if (counter == 0)
-            {
-                return true;
+                return ifsorted;
             }
             else
             {
-                return false;
+                return ifsorted;
             }
         }
 
         /// <4.8>
         /// 4Create a method called “InsertionSort” which has a single parameter of type LinkedList, 
-        /// while the calling code argument is the linkedlist name. The method code must follow the pseudo code supplied below in the Appendix. 
+        /// while the calling code argument is the linkedlist name. 
+        /// The method code must follow the pseudo code supplied below in the Appendix. 
         /// The return type is Boolean.
         /// </4.8>
-        private Boolean InsertionSort(LinkedList<double> values)
+        private bool InsertionSort(LinkedList<double> values)
         {
-            if (CheckIfAlreadySorted(values) == true)
+            bool ifSorted = false;
+            if (values.Count == 400)
             {
-                return false;
-            }
+                int max = NumberOfNodes(values);
 
-            int max = NumberOfNodes(values);
-
-            for (int i = 0; i < max - 1; i++)
-            {
-                for (int j = i + 1; j > 0; j--)
+                for (int i = 0; i < max - 1; i++)
                 {
-                    if (values.ElementAt(j - 1) > values.ElementAt(j))
-                    { 
-                        LinkedListNode<double> current = values.Find(values.ElementAt(j));
-                        LinkedListNode<double> currentI = values.Find(values.ElementAt(j - 1));
-                        double temp = values.ElementAt(j - 1);
-                        values.Remove(currentI);
-                        values.AddAfter(current, temp);
-                    }
-                }
-            }
-            return true;
-        }
-
-        private Boolean CheckIfAlreadySorted(LinkedList<double> values)
-        {
-            int counter = 0;
-            int max = NumberOfNodes(values);
-            for (int i = 0; i < max - 1; i++)
-            {
-                for (int j = i + 1; j > 0; j--)
-                {
-                    if (values.ElementAt(j - 1) > values.ElementAt(j))
+                    for (int j = i + 1; j > 0; j--)
                     {
-                        counter++;
+                        if (values.ElementAt(j - 1) > values.ElementAt(j))
+                        {
+                            LinkedListNode<double> current = values.Find(values.ElementAt(j));
+                            LinkedListNode<double> currentI = values.Find(values.ElementAt(j - 1));
+                            double temp = values.ElementAt(j - 1);
+                            values.Remove(currentI);
+                            values.AddAfter(current, temp);
+                            ifSorted = true;
+                        }
                     }
                 }
-            }
-
-            if (counter == 0)
-            {
-                return true;
+                return ifSorted;
             }
             else
             {
-                return false;
+                return ifSorted;
             }
         }
 
@@ -243,135 +213,309 @@ namespace MSSS_app_ASS_1
         /// The calling code argument is the linkedlist name, search value, minimum list size and the number of nodes in the list. 
         /// The method code must follow the pseudo code supplied below in the Appendix.
         /// </4.9>
-        private int BinarySearchIterative(LinkedList<double> LinkedList, double SearchValue, int Minimum, int Maxium)
+        private int BinarySearchIterative(LinkedList<double> LinkedList, int SearchValue, int Minimum, int Maxium)
         {
-            while (Minimum <= Maxium - 1)
-            {
-                int middle = (Minimum + Maxium) / 2;
-                if (SearchValue == LinkedList.ElementAt(middle))
+            if (SelectionSort(LinkedList) == true) {
+                while (Minimum <= Maxium - 1)
                 {
-                    return ++middle;
-                }
-                else if (SearchValue > middle - 1)
-                {
-                    Maxium = middle - 1;
-                }
-                else
-                {
-                    Maxium = middle + 1;
-                }
+                    int middle = Minimum + Maxium / 2;
+                    if (SearchValue == Convert.ToInt16(LinkedList.ElementAt(middle)))
+                    {
+                        return middle++;
+                    }
+                    else if (SearchValue < LinkedList.ElementAt(middle))
+                    {
+                        Maxium = middle - 1;
+                    }
+                    else
+                    {
+                        Maxium = middle + 1;
+                    }
+                } 
+                return Minimum;
             }
-            return Minimum;
+            else
+            {
+                return -1;
+            }
+
         }
 
         /// <4.10>
-        /// Create a method called “BinarySearchRecursive” which has the following four parameters: LinkedList, SearchValue, Minimum and Maximum.
+        /// Create a method called “BinarySearchRecursive” which has the following four parameters: 
+        /// LinkedList, SearchValue, Minimum and Maximum.
         /// This method will return an integer of the linkedlist element from a successful search or the nearest neighbour value. 
         /// The calling code argument is the linkedlist name, search value, minimum list size and the number of nodes in the list. 
         /// The method code must follow the pseudo code supplied below in the Appendix.
         /// </4.10>
-        private int BinarySearchRecursive(LinkedList<double> LinkedList, double SearchValue, int Minimum, int Maxium)
+        private int BinarySearchRecursive(LinkedList<double> LinkedList, int SearchValue, int Minimum, int Maxium)
         {
-            if (Minimum <= Maxium - 1)
+            if (SelectionSort(LinkedList) == true)
             {
-                int middle = (Minimum + Maxium) / 2;
-                if (SearchValue == LinkedList.ElementAt(middle))
+                if (Minimum <= Maxium - 1)
                 {
-                    return ++middle;
+                    int middle = (Minimum + Maxium) / 2;
+                    if (SearchValue == LinkedList.ElementAt(middle))
+                    {
+                        return middle;
+                    }
+                    else if (SearchValue < LinkedList.ElementAt(middle))
+                    {
+                        return BinarySearchRecursive(LinkedList, SearchValue, Minimum, middle - 1);
+                    }
+                    else
+                    {
+                        return BinarySearchRecursive(LinkedList, SearchValue, middle + 1, Maxium);
+                    }
                 }
-                else if (SearchValue < LinkedList.ElementAt(middle))
-                {
-                    return BinarySearchRecursive(LinkedList, SearchValue, Minimum, middle - 1);
-                }
-                else
-                {
-                    return BinarySearchRecursive(LinkedList, SearchValue, middle + 1, Maxium);
-                }
+                return Minimum;
             }
-            return Minimum;
+            else
+            {
+                return -1;
+            }
         }
 
 
         #endregion
 
         #region UI Button Methods
+        /// <4.11>
+        /// 4.11	Create button click methods that will search the LinkedList for an integer value entered into a textbox on the form. 
+        /// The four methods are:
+        /// 1.	Method for Sensor A and Binary Search Iterative
+        /// 2.	Method for Sensor A and Binary Search Recursive
+        /// 3.	Method for Sensor B and Binary Search Iterative
+        /// 4.	Method for Sensor B and Binary Search Recursive
+        /// The search code must check to ensure the data is sorted, then start a stopwatch before calling the search method.
+        /// Once the search is complete the stopwatch will stop, and the number of ticks will be displayed in a read only textbox.
+        /// Finally, the code/method will call the “DisplayListboxData” method and highlight the search target number and two values on each side.
+        /// </4.11>>
+        private void Number_Validation_TextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Iterative_SensorA(object sender, RoutedEventArgs e)
         {
-            int value = BinarySearchIterative(sensorA, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            BinarySearchIterative(sensorA, Convert.ToInt32(Search_TextBox_SensorA), 0, 400);
+            stopwatch.Stop();
+
+            DisplayListboxData(sensorA, SensorA_Listbox);
         }
 
         private void Iterative_SensorB(object sender, RoutedEventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int foundAt = BinarySearchIterative(sensorB, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
+            stopwatch.Stop();
+
             DisplayListboxData(sensorB, SensorB_Listbox);
-            
+            SensorB_Listbox.SelectedIndex = foundAt;
         }
 
         private void Recursive_SensorA(object sender, RoutedEventArgs e)
         {
-            BinarySearchRecursive(sensorA, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
-        }
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int foundAt = BinarySearchRecursive(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
+            stopwatch.Stop();
+            BS_Recursive_Timer_sensorA.Text = "TotalMilliseconds: " + stopwatch.Elapsed.TotalMilliseconds.ToString();
 
+            DisplayListboxData(sensorA, SensorA_Listbox);
+            if (foundAt == 1)
+            {
+                // Clear previously selected items
+                SensorA_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt - 1 to foundAt + 3
+                for (int i = foundAt - 1; i <= foundAt + 3; i++)
+                {
+                    if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
+                    }
+                }
+            }
+            else if (foundAt == 0)
+            {
+                // Clear previously selected items
+                SensorA_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt to foundAt + 4
+                for (int i = foundAt; i <= foundAt + 4; i++)
+                {
+                    if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
+                    }
+                }
+            }
+            else if (foundAt > 1)
+            {
+                // Clear previously selected items
+                SensorA_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt - 2 to foundAt + 2
+                for (int i = foundAt - 2; i <= foundAt + 2; i++)
+                {
+                    if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
+                    }
+                }
+                SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[4]);
+            }
+        }
         private void Recursive_SensorB(object sender, RoutedEventArgs e)
         {
-            BinarySearchRecursive(sensorB, Convert.ToDouble(Binary_Search_Iterative_sensorA.Text), 0, 400);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int foundAt = BinarySearchRecursive(sensorB, Convert.ToInt32(Search_TextBox_SensorB.Text), 0, 400);
+            stopwatch.Stop();
+            BS_Recursive_Timer_sensorB.Text = "TotalMilliseconds: " + stopwatch.Elapsed.TotalMilliseconds.ToString();
+
+            DisplayListboxData(sensorB, SensorB_Listbox);
+            if (foundAt == 1)
+            {
+                // Clear previously selected items
+                SensorB_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt - 1 to foundAt + 3
+                for (int i = foundAt - 1; i <= foundAt + 3; i++)
+                {
+                    if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
+                    }
+                }
+            }
+            else if (foundAt == 0)
+            {
+                // Clear previously selected items
+                SensorB_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt to foundAt + 4
+                for (int i = foundAt; i <= foundAt + 4; i++)
+                {
+                    if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
+                    }
+                }
+            }
+            else if (foundAt > 1)
+            {
+                // Clear previously selected items
+                SensorB_Listbox.SelectedItems.Clear();
+
+                // Select items from foundAt - 2 to foundAt + 2
+                for (int i = foundAt - 2; i <= foundAt + 2; i++)
+                {
+                    if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
+                    {
+                        SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
+                    }
+                }
+                SensorA_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[4]);
+            }
         }
 
+        /// <4.12>
+        /// Create button click methods that will sort the LinkedList using the Selection and Insertion methods. The four methods are:
+        /// 1.	Method for Sensor A and Selection Sort
+        /// 2.	Method for Sensor A and Insertion Sort
+        /// 3.	Method for Sensor B and Selection Sort
+        /// 4.	Method for Sensor B and Insertion Sort
+        /// The button method must start a stopwatch before calling the sort method.
+        /// Once the sort is complete the stopwatch will stop, and the number of milliseconds will be displayed in a read only textbox.
+        /// Finally, the code/method will call the “ShowAllSensorData” method and “DisplayListboxData” for the appropriate sensor.
+
+        /// </4.12>>
         private void Selection_SensorA(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(sensorA) == true)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            bool checker = SelectionSort(sensorA);
+            if (checker == true)
             {
-                ShowAllSensorData();
-                DisplayListboxData(sensorA, SensorA_Listbox);
+                stopwatch.Stop();
+                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
             }
             else
             {
-                MessageBox.Show("List already sorted!");
+                MessageBox.Show("Error");
+                stopwatch.Stop();
             }
+            ShowAllSensorData();
+            DisplayListboxData(sensorA, SensorA_Listbox);
         }
 
         private void Selection_SensorB(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(sensorB) == true)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            bool checker = SelectionSort(sensorB);
+            if (checker == true)
             {
-                ShowAllSensorData();
-                DisplayListboxData(sensorB, SensorB_Listbox);
+                stopwatch.Stop();
+                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
             }
             else
             {
-                MessageBox.Show("List already sorted!");
+                MessageBox.Show("Error");
+                stopwatch.Stop();
             }
+            ShowAllSensorData();
+            DisplayListboxData(sensorB, SensorB_Listbox);
         }
 
         private void Insertion_SensorA(object sender, RoutedEventArgs e)
         {
-            if (InsertionSort(sensorA) == true)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            bool checker = InsertionSort(sensorA);
+            if (checker == true)
             {
-                ShowAllSensorData();
-                DisplayListboxData(sensorA, SensorA_Listbox);
+                stopwatch.Stop();
+                Insertion_Sort_timer_SensorA.Text = "TotalMilliseconds: " + stopwatch.Elapsed.TotalMilliseconds.ToString();
             }
             else
             {
-                MessageBox.Show("List already sorted!");
+                MessageBox.Show("Error");
+                stopwatch.Stop();
             }
+            ShowAllSensorData();
+            DisplayListboxData(sensorA, SensorA_Listbox);
         }
 
         private void Insertion_SensorB(object sender, RoutedEventArgs e)
         {
-            if (InsertionSort(sensorB) == true)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            bool checker = InsertionSort(sensorB);
+            if (checker == true)
             {
-                ShowAllSensorData();
-                DisplayListboxData(sensorB, SensorB_Listbox);
+                stopwatch.Stop();
+                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
             }
             else
             {
-                MessageBox.Show("List already sorted!");
+                MessageBox.Show("Error");
+                stopwatch.Stop();
             }
+            ShowAllSensorData();
+            DisplayListboxData(sensorB, SensorB_Listbox);
         }
 
         /// <4.>
         /// 
         /// </4.>>
         #endregion
-
+        
     }
 }

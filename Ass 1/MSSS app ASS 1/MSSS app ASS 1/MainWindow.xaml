@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="23,0,-23,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="137*"/>
             <RowDefinition Height="297*"/>
@@ -22,23 +22,29 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListBox x:Name="SensorA_Listbox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="374,55,324,21" Grid.RowSpan="2"/>
+        <ListBox x:Name="SensorA_Listbox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="374,55,324,21" SelectionMode="Multiple" Grid.RowSpan="2"/>
         <Label Content="Sensor A" HorizontalAlignment="Left" Height="34" Margin="234,16,0,0" VerticalAlignment="Top" Width="126" FontSize="20"/>
-        <ListBox x:Name="SensorB_Listbox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="644,55,54,21" Grid.RowSpan="2"/>
+        <ListBox x:Name="SensorB_Listbox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="644,55,54,21" SelectionMode="Multiple" Grid.RowSpan="2"/>
         <Label Content="Sensor B" HorizontalAlignment="Left" Height="34" Margin="512,16,0,0" VerticalAlignment="Top" Width="126" FontSize="20"/>
         <Button x:Name="Load_Sensor_Data" Content="Load Sensor Data" HorizontalAlignment="Left" Margin="62,66,0,0" VerticalAlignment="Top" Height="32" Width="102" Click="Load_Button" RenderTransformOrigin="-0.131,0.47"/>
-        <Button x:Name="Binary_Search_Iterative_SensorA" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="229,52,0,0" VerticalAlignment="Top" Click="Iterative_SensorA" Grid.Row="1"/>
-        <Button x:Name="Binary_Search_Iterative_SensorB" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="497,52,0,0" VerticalAlignment="Top" Click="Iterative_SensorB" Grid.Row="1"/>
-        <Button x:Name="Binary_Search_Recursive_SensorA" Content="Binary search (Recursive)" HorizontalAlignment="Left" Margin="225,165,0,0" VerticalAlignment="Top" Click="Recursive_SensorA" Grid.Row="1"/>
-        <Button x:Name="Binary_Search_Recursive_SensorB" Content="Binary search (Recursive)" HorizontalAlignment="Left" Margin="493,165,0,0" VerticalAlignment="Top" Click="Recursive_SensorB" Grid.Row="1"/>
-        <Button x:Name="Selection_sort_SensorA" Content="Selection Sort " HorizontalAlignment="Left" Margin="252,66,0,0" VerticalAlignment="Top" Click="Selection_SensorA"/>
+        <Button x:Name="Binary_Search_Iterative_SensorA" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="230,122,0,0" VerticalAlignment="Top" Click="Iterative_SensorA" Grid.Row="1"/>
+        <Button x:Name="Binary_Search_Iterative_SensorB" Content="Binary search (iterative)" HorizontalAlignment="Left" Margin="501,122,0,0" VerticalAlignment="Top" Click="Iterative_SensorB" Grid.Row="1"/>
+        <Button x:Name="Binary_Search_Recursive_SensorA" Content="Binary search (Recursive)" HorizontalAlignment="Left" Margin="230,185,0,0" VerticalAlignment="Top" Click="Recursive_SensorA" Grid.Row="1"/>
+        <Button x:Name="Binary_Search_Recursive_SensorB" Content="Binary search (Recursive)" HorizontalAlignment="Left" Margin="501,185,0,0" VerticalAlignment="Top" Click="Recursive_SensorB" Grid.Row="1"/>
+        <Button x:Name="Selection_sort_SensorA" Content="Selection Sort " HorizontalAlignment="Left" Margin="254,66,0,0" VerticalAlignment="Top" Click="Selection_SensorA"/>
         <Button x:Name="Selection_sort_SensorB" Content="Selection Sort " HorizontalAlignment="Left" Margin="520,66,0,0" VerticalAlignment="Top" Click="Selection_SensorB"/>
-        <Button x:Name="Insertion_sort_SensorA" Content="Insertion sort" HorizontalAlignment="Left" Margin="252,120,0,0" VerticalAlignment="Top" Click="Insertion_SensorA" Grid.RowSpan="2"/>
-        <Button x:Name="Insertion_sort_SensorB" Content="Insertion sort" HorizontalAlignment="Left" Margin="523,120,0,0" VerticalAlignment="Top" Click="Insertion_SensorB" Grid.RowSpan="2"/>
-        <TextBox x:Name="Binary_Search_Iterative_sensorA" HorizontalAlignment="Left" Height="18" Margin="227,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
-        <TextBox x:Name="Binary_Search_Recursive_sensorA" HorizontalAlignment="Left" Height="18" Margin="227,197,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="133" Grid.Row="1"/>
-        <TextBox x:Name="Binary_Search_Iterative_sensorB" HorizontalAlignment="Left" Height="18" Margin="497,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
-        <TextBox x:Name="Binary_Search_Recursive_sensorB" HorizontalAlignment="Left" Height="18" Margin="493,197,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <Button x:Name="Insertion_sort_SensorA" Content="Insertion sort" HorizontalAlignment="Left" Margin="256,130,0,0" VerticalAlignment="Top" Click="Insertion_SensorA" Grid.RowSpan="2"/>
+        <Button x:Name="Insertion_sort_SensorB" Content="Insertion sort" HorizontalAlignment="Left" Margin="526,130,0,0" VerticalAlignment="Top" Click="Insertion_SensorB" Grid.RowSpan="2"/>
+        <TextBox x:Name="BS_Iterative_Timer_sensorA" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="230,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <TextBox x:Name="BS_Recursive_Timer_sensorA" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="230,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="133" Grid.Row="1"/>
+        <TextBox x:Name="BS_Iterative_Timer_sensorB" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="497,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <TextBox x:Name="BS_Recursive_Timer_sensorB" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="497,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <TextBox x:Name="Selection_Sort_timer_SensorB" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="497,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678"/>
+        <TextBox x:Name="Selection_Sort_timer_SensorA" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="230,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678"/>
+        <TextBox x:Name="Insertion_Sort_timer_SensorA" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="230,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <TextBox x:Name="Insertion_Sort_timer_SensorB" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="498,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678" Grid.Row="1"/>
+        <TextBox x:Name="Search_TextBox_SensorA" HorizontalAlignment="Left" Height="18" Margin="230,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678"  PreviewTextInput="Number_Validation_TextBox" Grid.Row="1"/>
+        <TextBox x:Name="Search_TextBox_SensorB" HorizontalAlignment="Left" Height="18" Margin="498,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.775,0.678"  PreviewTextInput="Number_Validation_TextBox" Grid.Row="1"/>
 
     </Grid>
 </Window>
