@@ -73,9 +73,9 @@ C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS ap
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.AssemblyInfo.cs
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.csproj.CoreCompileInputs.cache
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.sourcelink.json
-C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.csproj.CopyComplete
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.dll
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\refint\MSSS app ASS 1.dll
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.pdb
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app ASS 1.genruntimeconfig.cache
 C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\ref\MSSS app ASS 1.dll
+C:\Users\30062804\Documents\GitHub\Marlin_Space_Science_Sensor_App\Ass 1\MSSS app ASS 1\MSSS app ASS 1\obj\Debug\net6.0-windows\MSSS app.75113BAF.Up2Date
