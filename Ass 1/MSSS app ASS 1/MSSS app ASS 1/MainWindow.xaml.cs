@@ -371,7 +371,7 @@ namespace MSSS_app_ASS_1
                     stopwatch.Start();
                     int foundAt = BinarySearchRecursive(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
                     stopwatch.Stop();
-                    BS_Iterative_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
+                    BS_Recursive_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
 
                     HighLightSelectedItems(foundAt, SensorA_Listbox, sensorA);
                 }
