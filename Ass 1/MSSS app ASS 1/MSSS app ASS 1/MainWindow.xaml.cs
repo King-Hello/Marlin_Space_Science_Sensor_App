@@ -270,7 +270,7 @@ namespace MSSS_app_ASS_1
 
         #region UI Button Methods (questions 4.11 - 4.14)
         /// <4.11>
-        /// 4.11	Create button click methods that will search the LinkedList for an integer value entered into a textbox on the form. 
+        /// Create button click methods that will search the LinkedList for an integer value entered into a textbox on the form. 
         /// The four methods are:
         /// 1.	Method for Sensor A and Binary Search Iterative
         /// 2.	Method for Sensor A and Binary Search Recursive
@@ -280,201 +280,105 @@ namespace MSSS_app_ASS_1
         /// Once the search is complete the stopwatch will stop, and the number of ticks will be displayed in a read only textbox.
         /// Finally, the code/method will call the “DisplayListboxData” method and highlight the search target number and two values on each side.
         /// </4.11>>
-        private void Number_Validation_TextBox(object sender, TextCompositionEventArgs e)
+
+        private void HighLightSelectedItems(int foundAt, ListBox listBox, LinkedList<double> linikedlist)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            if (foundAt != -1)
+            {
+                listBox.SelectedItems.Clear();
+
+                int startIndex = Math.Max(0, foundAt - 2);
+                int endIndex = Math.Min(linikedlist.Count - 1, foundAt + 2);
+
+                if (endIndex - startIndex < 4)
+                {
+                    if (startIndex == 0)
+                    {
+                        endIndex = Math.Min(sensorA.Count - 1, startIndex + 4);
+                    }
+                    else if (endIndex == linikedlist.Count - 1)
+                    {
+                        startIndex = Math.Max(0, endIndex - 1);
+                    }
+                }
+
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    listBox.SelectedItems.Add(listBox.Items[i]);
+                }
+
+                listBox.ScrollIntoView(listBox.SelectedItems[0]);
+            }
         }
 
         private void Iterative_SensorA(object sender, RoutedEventArgs e)
         {
-            LinkedList<double> testsensor = new();
-            foreach (double node in sensorA)
+            if (SelectionSort(sensorA))
             {
-                testsensor.AddLast(node);
-            }
-
-            SelectionSort(testsensor);
-            Stopwatch stopwatch = new Stopwatch();
-            if (sensorA.SequenceEqual(testsensor))
-            {
-                stopwatch.Start();
-                int foundAt = BinarySearchIterative(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
-                stopwatch.Stop();
-                BS_Iterative_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
-
-                DisplayListboxData(sensorA, SensorA_Listbox);
-                if (foundAt == 1)
+                try
                 {
-                    // Clear previously selected items
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt - 1 to foundAt + 3
-                    for (int i = foundAt - 1; i <= foundAt + 3; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    int foundAt = BinarySearchIterative(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
+                    stopwatch.Stop();
+                    BS_Iterative_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
+                    HighLightSelectedItems(foundAt, SensorA_Listbox, sensorA);
                 }
-                else if (foundAt == 0)
+                catch (Exception ex)
                 {
-                    // Clear previously selected items
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt to foundAt + 4
-                    for (int i = foundAt; i <= foundAt + 4; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt > 1 && foundAt < 398)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 2; i <= foundAt + 2; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count)
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[4]);
-                }
-                else if (foundAt == 398)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 3; i <= foundAt + 1; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) 
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt == 399)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt - 2 to foundAt + 2
-                    for (int i = foundAt - 4; i <= foundAt; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
             {
                 MessageBox.Show("Please sort the list first");
             }
-            DisplayListboxData(sensorA, SensorA_Listbox);
         }
+
 
         private void Iterative_SensorB(object sender, RoutedEventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            int foundAt = BinarySearchIterative(sensorB, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
-            stopwatch.Stop();
-
-            DisplayListboxData(sensorB, SensorB_Listbox);
-            SensorB_Listbox.SelectedIndex = foundAt;
+            if (SelectionSort(sensorB))
+            {
+                try
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    int foundAt = BinarySearchIterative(sensorB, Convert.ToInt32(Search_TextBox_SensorB.Text), 0, 400);
+                    stopwatch.Stop();
+                    BS_Iterative_Timer_sensorB.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
+                    HighLightSelectedItems(foundAt, SensorB_Listbox, sensorB);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please sort the list first");
+            }
         }
+
 
         private void Recursive_SensorA(object sender, RoutedEventArgs e)
         {
-            LinkedList<double> testsensor = new();
-            foreach (double node in sensorA)
+            if (SelectionSort(sensorA))
             {
-                testsensor.AddLast(node);
-            }
-
-            SelectionSort(testsensor);
-            Stopwatch stopwatch = new Stopwatch();
-            if (sensorA.SequenceEqual(testsensor))
-            {
-                stopwatch.Start();
-                int foundAt = BinarySearchRecursive(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
-                stopwatch.Stop();
-                BS_Recursive_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
-
-                DisplayListboxData(sensorA, SensorA_Listbox);
-                if (foundAt == 1)
+                try
                 {
-                    SensorA_Listbox.SelectedItems.Clear();
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    int foundAt = BinarySearchRecursive(sensorA, Convert.ToInt32(Search_TextBox_SensorA.Text), 0, 400);
+                    stopwatch.Stop();
+                    BS_Iterative_Timer_sensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
 
-                    for (int i = foundAt - 1; i <= foundAt + 3; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) 
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
+                    HighLightSelectedItems(foundAt, SensorA_Listbox, sensorA);
                 }
-                else if (foundAt == 0)
+                catch (Exception ex)
                 {
-                    SensorA_Listbox.SelectedItems.Clear();
+                    MessageBox.Show(ex.Message);
 
-                    for (int i = foundAt; i <= foundAt + 4; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) 
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt > 1 && foundAt < 398)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 2; i <= foundAt + 2; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count)
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[4]);
-                }
-                else if (foundAt == 398)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 3; i <= foundAt + 1; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) 
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt == 399)
-                {
-                    SensorA_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 4; i <= foundAt; i++)
-                    {
-                        if (i >= 0 && i < SensorA_Listbox.Items.Count) 
-                        {
-                            SensorA_Listbox.SelectedItems.Add(SensorA_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorA_Listbox.SelectedItems[0]);
                 }
             }
             else
@@ -484,87 +388,21 @@ namespace MSSS_app_ASS_1
         }
         private void Recursive_SensorB(object sender, RoutedEventArgs e)
         {
-            LinkedList<double> testsensor = sensorB;
-            SelectionSort(testsensor);
-
             Stopwatch stopwatch = new Stopwatch();
-            if (sensorB.SequenceEqual(testsensor))
+            if (SelectionSort(sensorB))
             {
-                stopwatch.Start();
-                int foundAt = BinarySearchRecursive(sensorB, Convert.ToInt32(Search_TextBox_SensorB.Text), 0, 400);
-                stopwatch.Stop();
-                BS_Recursive_Timer_sensorB.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
-
-                DisplayListboxData(sensorB, SensorB_Listbox);
-                if (foundAt == 1)
+                try
                 {
-                    SensorB_Listbox.SelectedItems.Clear();
+                    stopwatch.Start();
+                    int foundAt = BinarySearchRecursive(sensorB, Convert.ToInt32(Search_TextBox_SensorB.Text), 0, 400);
+                    stopwatch.Stop();
+                    BS_Recursive_Timer_sensorB.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
 
-                    // Select items from foundAt - 1 to foundAt + 3
-                    for (int i = foundAt - 1; i <= foundAt + 3; i++)
-                    {
-                        if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
-                        }
-                    }
-                    SensorB_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[0]);
+                    HighLightSelectedItems(foundAt, SensorB_Listbox, sensorA);
                 }
-                else if (foundAt == 0)
+                catch (Exception ex)
                 {
-                    // Clear previously selected items
-                    SensorB_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt to foundAt + 4
-                    for (int i = foundAt; i <= foundAt + 4; i++)
-                    {
-                        if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
-                        }
-                    }
-                    SensorB_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt > 1 && foundAt < 398)
-                {
-                    SensorB_Listbox.SelectedItems.Clear();
-
-                    for (int i = foundAt - 2; i <= foundAt + 2; i++)
-                    {
-                        if (i >= 0 && i < SensorB_Listbox.Items.Count)
-                        {
-                            SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
-                        }
-                    }
-                    SensorA_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[4]);
-                }
-                else if (foundAt == 398)
-                {
-                    SensorB_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt - 2 to foundAt + 2
-                    for (int i = foundAt - 3; i <= foundAt + 1; i++)
-                    {
-                        if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
-                        }
-                    }
-                    SensorB_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[0]);
-                }
-                else if (foundAt == 399)
-                {
-                    SensorB_Listbox.SelectedItems.Clear();
-
-                    // Select items from foundAt - 2 to foundAt + 2
-                    for (int i = foundAt - 4; i <= foundAt; i++)
-                    {
-                        if (i >= 0 && i < SensorB_Listbox.Items.Count) // Ensure the index is valid
-                        {
-                            SensorB_Listbox.SelectedItems.Add(SensorB_Listbox.Items[i]);
-                        }
-                    }
-                    SensorB_Listbox.ScrollIntoView(SensorB_Listbox.SelectedItems[0]);
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -588,17 +426,10 @@ namespace MSSS_app_ASS_1
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            bool checker = SelectionSort(sensorA);
-            if (checker == true)
-            {
-                stopwatch.Stop();
-                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
-            }
-            else
-            {
-                MessageBox.Show("Error");
-                stopwatch.Stop();
-            }
+            SelectionSort(sensorA);
+            stopwatch.Stop();
+            Selection_Sort_timer_SensorA.Clear();
+            Selection_Sort_timer_SensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
             ShowAllSensorData();
             DisplayListboxData(sensorA, SensorA_Listbox);
         }
@@ -607,17 +438,10 @@ namespace MSSS_app_ASS_1
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            bool checker = SelectionSort(sensorB);
-            if (checker == true)
-            {
-                stopwatch.Stop();
-                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
-            }
-            else
-            {
-                MessageBox.Show("Error");
-                stopwatch.Stop();
-            }
+            SelectionSort(sensorB);
+            stopwatch.Stop();
+            Selection_Sort_timer_SensorB.Clear();
+            Selection_Sort_timer_SensorB.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
             ShowAllSensorData();
             DisplayListboxData(sensorB, SensorB_Listbox);
         }
@@ -626,17 +450,10 @@ namespace MSSS_app_ASS_1
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            bool checker = InsertionSort(sensorA);
-            if (checker == true)
-            {
-                stopwatch.Stop();
-                Insertion_Sort_timer_SensorA.Text = "TotalMilliseconds: " + stopwatch.Elapsed.TotalMilliseconds.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Error");
-                stopwatch.Stop();
-            }
+            InsertionSort(sensorA);
+            stopwatch.Stop();
+            Insertion_Sort_timer_SensorA.Clear();
+            Insertion_Sort_timer_SensorA.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
             ShowAllSensorData();
             DisplayListboxData(sensorA, SensorA_Listbox);
         }
@@ -645,24 +462,25 @@ namespace MSSS_app_ASS_1
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            bool checker = InsertionSort(sensorB);
-            if (checker == true)
-            {
-                stopwatch.Stop();
-                int totaltime = Convert.ToInt32(stopwatch.Elapsed.TotalMilliseconds);
-            }
-            else
-            {
-                MessageBox.Show("Error");
-                stopwatch.Stop();
-            }
+            InsertionSort(sensorB);
+            stopwatch.Stop();
+            Insertion_Sort_timer_SensorB.Clear();
+            Insertion_Sort_timer_SensorB.Text = stopwatch.Elapsed.TotalMilliseconds.ToString();
             ShowAllSensorData();
             DisplayListboxData(sensorB, SensorB_Listbox);
         }
 
-        /// <4.>
-        /// 
-        /// </4.>>
+
+        /// <4.14>
+        /// Add textboxes for the search value; one for each sensor, ensure only numeric integer values can be entered.
+        /// </4.14>>
+        private void Number_Validation_TextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        
         #endregion
         
     }
